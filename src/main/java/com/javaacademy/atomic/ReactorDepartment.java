@@ -15,36 +15,30 @@ public class ReactorDepartment {
     /*
     запустить реактор
      */
-    public long run() {
-        try {
-            doubleWorkingCheck();
-        }
-        catch (ReactorWorkException e) {
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            runsCheck();
-        }
-        catch (NuclearFuelIsEmptyException e){
-            runs++;
-        }
-        isWorking = true;
-        runs++;
-        return 10_000_000;
-    }
-
-    private void doubleWorkingCheck() throws ReactorWorkException {
+    public long run() throws ReactorWorkException, NuclearFuelIsEmptyException{
         if (isWorking == true) {
             throw new ReactorWorkException("Реактор уже работает");
         }
-    }
-
-    private void runsCheck() throws ReactorWorkException {
-        if(runs % finalRundelimeter == 0) {
+        if(runs % finalRundelimeter == 0 && runs > 0) {
+            runs++;
             throw new NuclearFuelIsEmptyException();
         }
+        runs++;
+        isWorking = true;
+        return 10_000_000;
     }
+
+//    private void doubleWorkingCheck() throws ReactorWorkException {
+//        if (isWorking == true) {
+//            throw new ReactorWorkException("Реактор уже работает");
+//        }
+//    }
+
+//    private void runsCheck() throws ReactorWorkException {
+//        if(runs % finalRundelimeter == 0) {
+//            throw new NuclearFuelIsEmptyException();
+//        }
+//    }
 
     /*
     остановить реактор
