@@ -11,16 +11,19 @@ public class ReactorDepartment {
     private boolean isWorking;
     private int runs = 0;
     private final int finalRundelimeter = 100;
+    private SecutiryDepartment securityDepartment;
 
     /*
     запустить реактор
      */
     public long run() throws ReactorWorkException, NuclearFuelIsEmptyException{
         if (isWorking == true) {
+            securityDepartment.addAccident();
             throw new ReactorWorkException("Реактор уже работает");
         }
         if(runs % finalRundelimeter == 0 && runs > 0) {
             runs++;
+            securityDepartment.addAccident();
             throw new NuclearFuelIsEmptyException();
         }
         runs++;
@@ -48,6 +51,7 @@ public class ReactorDepartment {
             doubleStopCheck();
         }
         catch (ReactorWorkException e) {
+            securityDepartment.addAccident();
             System.out.println(e.getMessage());
         }
         isWorking = false;
