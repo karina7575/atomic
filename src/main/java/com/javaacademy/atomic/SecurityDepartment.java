@@ -1,6 +1,5 @@
 package com.javaacademy.atomic;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -8,11 +7,11 @@ import org.springframework.stereotype.Component;
 отдел безопасности
  */
 @Component
-public class SecutiryDepartment {
+public class SecurityDepartment {
     private int accidentCountPeriod;
     private NuclearStation nuclearStation;
 
-    public SecutiryDepartment(@Lazy NuclearStation nuclearStation) {
+    public SecurityDepartment(@Lazy NuclearStation nuclearStation) {
         this.nuclearStation = nuclearStation;
     }
 

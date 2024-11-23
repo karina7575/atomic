@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class NuclearStation {
     private ReactorDepartment reactorDepartment;
-    private SecutiryDepartment securityDepartment;
+    private SecurityDepartment securityDepartment;
     private long amountGeneratedEnergy = 0;
     private int accidentCountAllTime = 0;
 
-    public NuclearStation(ReactorDepartment reactorDepartment, SecutiryDepartment securityDepartment) {
+    public NuclearStation(ReactorDepartment reactorDepartment, SecurityDepartment securityDepartment) {
         this.reactorDepartment = reactorDepartment;
         this.securityDepartment = securityDepartment;
     }
@@ -36,6 +36,7 @@ public class NuclearStation {
         }
         log.info("Атомная станция закончила работу. За год Выработано {} киловатт/часов", yearEnergy);
         amountGeneratedEnergy += yearEnergy;
+        log.info("Количество инцидентов за год: {}" + securityDepartment.getCountAccidents());
         securityDepartment.reset();
     }
 
@@ -43,6 +44,7 @@ public class NuclearStation {
         for (int i = 0; i < year; i++) {
             startYear();
         }
+        log.info("Количество инцидентов за всю работу станции: {}", accidentCountAllTime);
     }
 
     public void incrementAccident(int count) {

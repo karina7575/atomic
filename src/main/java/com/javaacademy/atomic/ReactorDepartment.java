@@ -11,11 +11,15 @@ public class ReactorDepartment {
     private boolean isWorking;
     private int runs = 0;
     private final int finalRundelimeter = 100;
-    private SecutiryDepartment securityDepartment;
+    private SecurityDepartment securityDepartment;
+
+    public ReactorDepartment(SecurityDepartment securityDepartment) {
+        this.securityDepartment = securityDepartment;
+    }
 
     /*
-    запустить реактор
-     */
+        запустить реактор
+         */
     public long run() throws ReactorWorkException, NuclearFuelIsEmptyException{
         if (isWorking == true) {
             securityDepartment.addAccident();
