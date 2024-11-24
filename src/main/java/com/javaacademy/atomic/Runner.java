@@ -1,5 +1,6 @@
 package com.javaacademy.atomic;
 
+import com.javaacademy.atomic.station_components.NuclearStation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

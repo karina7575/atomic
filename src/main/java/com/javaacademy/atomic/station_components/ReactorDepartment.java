@@ -1,4 +1,4 @@
-package com.javaacademy.atomic;
+package com.javaacademy.atomic.station_components;
 
 import com.javaacademy.atomic.exceptions.NuclearFuelIsEmptyException;
 import com.javaacademy.atomic.exceptions.ReactorWorkException;

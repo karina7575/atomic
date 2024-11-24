@@ -1,4 +1,4 @@
-package com.javaacademy.atomic;
+package com.javaacademy.atomic.station_components;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;

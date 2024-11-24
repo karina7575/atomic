@@ -1,5 +1,6 @@
-package com.javaacademy.atomic;
+package com.javaacademy.atomic.station_components;
 
+import com.javaacademy.atomic.economic_departments.EconomicDepartment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -13,10 +14,12 @@ public class NuclearStation {
     private SecurityDepartment securityDepartment;
     private long amountGeneratedEnergy = 0;
     private int accidentCountAllTime = 0;
+    private EconomicDepartment economicDepartment;
 
-    public NuclearStation(ReactorDepartment reactorDepartment, SecurityDepartment securityDepartment) {
+    public NuclearStation(ReactorDepartment reactorDepartment, SecurityDepartment securityDepartment, EconomicDepartment economicDepartment) {
         this.reactorDepartment = reactorDepartment;
         this.securityDepartment = securityDepartment;
+        this.economicDepartment = economicDepartment;
     }
 
     /*
@@ -38,9 +41,11 @@ public class NuclearStation {
         amountGeneratedEnergy += yearEnergy;
         log.info("Количество инцидентов за год: {}" + securityDepartment.getCountAccidents());
         securityDepartment.reset();
+        log.info("Доход за год составил {}", economicDepartment.computeYearIncomes(yearEnergy), economicDepartment.getCurrency());
     }
 
     public void start(int year) {
+        log.info("Действие происходит в стране: {}", economicDepartment.getCountry());
         for (int i = 0; i < year; i++) {
             startYear();
         }
