@@ -14,9 +14,7 @@ import java.math.BigDecimal;
 @Getter
 @PropertySource("classpath:application-france.yaml")
 public class FranceEconomicDepartment extends EconomicDepartment{
-    //@Value("${france.country}")
     private final Country country;
-    //@Value("${france.currency}")
     private final Currency currency;
 
     public FranceEconomicDepartment(@Value("${france.country}") Country country, @Value("${france.currency}")Currency currency) {
@@ -35,5 +33,4 @@ public class FranceEconomicDepartment extends EconomicDepartment{
         income = income.add(BigDecimal.valueOf(countElectricity).multiply(BigDecimal.valueOf(0.5)).multiply(BigDecimal.valueOf(Math.pow(0.99, i + 1))));
         return income;
     }
-
 }
