@@ -13,7 +13,7 @@ public class NuclearStation {
     private ReactorDepartment reactorDepartment;
     private SecurityDepartment securityDepartment;
     private long amountGeneratedEnergy = 0;
-    private int accidentCountAllTime = 0;
+    private long accidentCountAllTime = 0;
     private EconomicDepartment economicDepartment;
 
     public NuclearStation(ReactorDepartment reactorDepartment, SecurityDepartment securityDepartment, EconomicDepartment economicDepartment) {

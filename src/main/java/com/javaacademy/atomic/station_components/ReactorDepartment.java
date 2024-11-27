@@ -2,11 +2,15 @@ package com.javaacademy.atomic.station_components;
 
 import com.javaacademy.atomic.exceptions.NuclearFuelIsEmptyException;
 import com.javaacademy.atomic.exceptions.ReactorWorkException;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 /*
 реакторный цех
  */
 @Component
+@Setter
+@Getter
 public class ReactorDepartment {
     private boolean isWorking;
     private int runs = 0;
@@ -35,35 +39,14 @@ public class ReactorDepartment {
         return 10_000_000;
     }
 
-//    private void doubleWorkingCheck() throws ReactorWorkException {
-//        if (isWorking == true) {
-//            throw new ReactorWorkException("Реактор уже работает");
-//        }
-//    }
-
-//    private void runsCheck() throws ReactorWorkException {
-//        if(runs % finalRundelimeter == 0) {
-//            throw new NuclearFuelIsEmptyException();
-//        }
-//    }
-
     /*
     остановить реактор
      */
     public void stop() {
-        try {
-            doubleStopCheck();
-        }
-        catch (ReactorWorkException e) {
-            securityDepartment.addAccident();
-            System.out.println(e.getMessage());
-        }
-        isWorking = false;
-    }
-
-    private void doubleStopCheck() {
-        if (isWorking == false) {
+        if (!isWorking) {
             throw new ReactorWorkException("Реактор уже выключен");
         }
+        securityDepartment.addAccident();
+        isWorking = false;
     }
 }
