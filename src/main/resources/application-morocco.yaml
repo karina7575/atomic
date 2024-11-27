@@ -1,3 +1,5 @@
 morocco:
   country: MOROCCO
   currency: DIRHAM
+  price: 5
+  bigger-price: 6
