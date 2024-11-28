@@ -1,5 +1,6 @@
 package com.javaacademy.atomic.unit_tests;
 
+import com.javaacademy.atomic.exceptions.NuclearFuelIsEmptyException;
 import com.javaacademy.atomic.exceptions.ReactorWorkException;
 import com.javaacademy.atomic.station_components.ReactorDepartment;
 import org.junit.jupiter.api.Assertions;
@@ -9,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest
-@ActiveProfiles("morocco")
-public class ReactorDepartmentTest {
+@ActiveProfiles("france")
+public class ReactorDepartmentFranceTest {
     @Autowired
     private ReactorDepartment reactorDepartment;
 
@@ -37,15 +38,20 @@ public class ReactorDepartmentTest {
     /*
     проверка метода run, что каждый 100 запуск - выдает ошибку NuclearFuelIsEmptyException
      */
+    @Test
+    public void run100Failure() {
+        reactorDepartment.setRuns(100);
+        Assertions.assertThrows(NuclearFuelIsEmptyException.class, () -> reactorDepartment.run());
+    }
 
-     /*
-    проверка метода stop, что выбрасывает ошибку ReactorWorkException если реактор уже включен
-     */
-     @Test
-     public void stopFailure() {
-         reactorDepartment.setWorking(false);
-         Assertions.assertThrows(ReactorWorkException.class, () -> reactorDepartment.stop());
-     }
+    /*
+   проверка метода stop, что выбрасывает ошибку ReactorWorkException если реактор уже включен
+    */
+    @Test
+    public void stopFailure() {
+        reactorDepartment.setWorking(false);
+        Assertions.assertThrows(ReactorWorkException.class, () -> reactorDepartment.stop());
+    }
 
     /*
     проверка метода stop, что меняет состояние реактора
@@ -56,6 +62,4 @@ public class ReactorDepartmentTest {
         reactorDepartment.stop();
         Assertions.assertFalse(reactorDepartment.isWorking());
     }
-
-
 }

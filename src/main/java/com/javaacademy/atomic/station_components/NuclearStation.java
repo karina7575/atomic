@@ -1,6 +1,7 @@
 package com.javaacademy.atomic.station_components;
 
 import com.javaacademy.atomic.economic_departments.EconomicDepartment;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Slf4j
+@Getter
 public class NuclearStation {
     private ReactorDepartment reactorDepartment;
     private SecurityDepartment securityDepartment;
@@ -16,15 +18,16 @@ public class NuclearStation {
     private long accidentCountAllTime = 0;
     private EconomicDepartment economicDepartment;
 
-    public NuclearStation(ReactorDepartment reactorDepartment, SecurityDepartment securityDepartment, EconomicDepartment economicDepartment) {
+    public NuclearStation(ReactorDepartment reactorDepartment, SecurityDepartment securityDepartment,
+                          EconomicDepartment economicDepartment) {
         this.reactorDepartment = reactorDepartment;
         this.securityDepartment = securityDepartment;
         this.economicDepartment = economicDepartment;
     }
 
     /*
-        Запуск годового цикла производства электричества
-         */
+    Запуск годового цикла производства электричества
+    */
     public void startYear() {
         long yearEnergy = 0;
         log.info("Атомная станция начала работу");
@@ -32,8 +35,7 @@ public class NuclearStation {
             try {
                 yearEnergy += reactorDepartment.run();
                 reactorDepartment.stop();
-            }
-            catch (RuntimeException e) {
+            } catch (RuntimeException e) {
                 log.info("Внимание! Происходят работы на атомной станции! Электричества нет!");
             }
         }
@@ -41,15 +43,18 @@ public class NuclearStation {
         amountGeneratedEnergy += yearEnergy;
         log.info("Количество инцидентов за год: {}" + securityDepartment.getCountAccidents());
         securityDepartment.reset();
-        log.info("Доход за год составил {}", economicDepartment.computeYearIncomes(yearEnergy), economicDepartment.getCurrency());
+        log.info("Доход за год составил {}", economicDepartment.computeYearIncomes(yearEnergy),
+                economicDepartment.getCurrency());
     }
 
-    public void start(int year) {
+    public String start(int year) {
         log.info("Действие происходит в стране: {}", economicDepartment.getCountry());
         for (int i = 0; i < year; i++) {
             startYear();
         }
         log.info("Количество инцидентов за всю работу станции: {}", accidentCountAllTime);
+        String result = "Количество инцидентов за всю работу станции: " + accidentCountAllTime;
+        return result;
     }
 
     public void incrementAccident(int count) {

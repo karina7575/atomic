@@ -24,12 +24,11 @@ public class ReactorDepartment {
     /*
         запустить реактор
          */
-    public long run() throws ReactorWorkException, NuclearFuelIsEmptyException{
-        if (isWorking == true) {
+    public long run() throws ReactorWorkException, NuclearFuelIsEmptyException {
+        if (isWorking) {
             securityDepartment.addAccident();
             throw new ReactorWorkException("Реактор уже работает");
-        }
-        if(runs % finalRundelimeter == 0 && runs > 0) {
+        } else if (runs % finalRundelimeter == 0 && runs > 0) {
             runs++;
             securityDepartment.addAccident();
             throw new NuclearFuelIsEmptyException();
@@ -44,9 +43,9 @@ public class ReactorDepartment {
      */
     public void stop() {
         if (!isWorking) {
+            securityDepartment.addAccident();
             throw new ReactorWorkException("Реактор уже выключен");
         }
-        securityDepartment.addAccident();
         isWorking = false;
     }
 }

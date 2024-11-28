@@ -2,7 +2,6 @@ package com.javaacademy.atomic.config;
 
 import com.javaacademy.atomic.economic_departments.Country;
 import com.javaacademy.atomic.economic_departments.Currency;
-import com.javaacademy.atomic.economic_departments.FranceEconomicDepartment;
 import com.javaacademy.atomic.economic_departments.MoroccoEconomicDepartment;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
